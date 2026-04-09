@@ -1,0 +1,73 @@
+{
+	"name": "demo-component",
+	"version": "0.0.0",
+	"description": "A Lit web component.",
+	"keywords": [
+		"lit",
+		"web-component",
+		"custom-element"
+	],
+	"homepage": "https://github.com/kitschpatrol/demo-component",
+	"bugs": "https://github.com/kitschpatrol/demo-component/issues",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/kitschpatrol/demo-component.git"
+	},
+	"license": "MIT",
+	"author": {
+		"name": "Eric Mika",
+		"email": "eric@ericmika.com",
+		"url": "https://ericmika.com"
+	},
+	"sideEffects": [
+		"./dist/demo-component.js"
+	],
+	"type": "module",
+	"exports": {
+		".": {
+			"types": "./dist/demo-component.d.ts",
+			"default": "./dist/demo-component.js"
+		}
+	},
+	"main": "./dist/demo-component.js",
+	"module": "./dist/demo-component.js",
+	"types": "./dist/demo-component.d.ts",
+	"files": [
+		"dist",
+		"src"
+	],
+	"scripts": {
+		"bench": "vitest bench --run --compare test/benchmarks/baseline.json",
+		"bench:baseline": "vitest bench --run --outputJson test/benchmarks/baseline.json",
+		"build": "vite build",
+		"clean": "shx rm -f pnpm-lock.yaml && git clean -fdX -e !.claude/",
+		"dev": "poptab && vite",
+		"fix": "ksc fix",
+		"lint": "ksc lint",
+		"preview": "poptab && vite preview",
+		"release": "bumpp --commit 'Release: %s'",
+		"test": "vitest run"
+	},
+	"devDependencies": {
+		"@kitschpatrol/shared-config": "^7.2.0",
+		"@types/node": "~20.19.39",
+		"bumpp": "^11.0.1",
+		"happy-dom": "^20.8.9",
+		"lit": "^3.3.2",
+		"poptab": "^1.1.0",
+		"shx": "^0.4.0",
+		"typescript": "~5.9.3",
+		"vite": "^8.0.8",
+		"vitest": "^4.1.4"
+	},
+	"peerDependencies": {
+		"lit": "^3.0.0"
+	},
+	"packageManager": "pnpm@10.33.0",
+	"devEngines": {
+		"runtime": {
+			"name": "node",
+			"version": ">=22.18.0"
+		}
+	}
+}

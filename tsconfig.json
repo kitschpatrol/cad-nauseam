@@ -1,0 +1,17 @@
+{
+	"extends": "@kitschpatrol/typescript-config",
+	"compilerOptions": {
+		"useDefineForClassFields": false,
+		// Lit's publishing guideline: use legacy experimental decorators for
+		// compatibility with the widest toolchain. Vite 8 / oxc currently
+		// transforms experimental decorators but not TC39 standard decorators.
+		"experimentalDecorators": true,
+		"types": ["vite/client"],
+		// Override the shared base's `erasableSyntaxOnly: true`, which forbids
+		// experimentalDecorators.
+		"erasableSyntaxOnly": false
+	},
+	// Includes project dot-files files for typescript-eslint integration
+	"include": ["**/*", "**/**.*"],
+	"exclude": ["**/dist/", "**/bin/"]
+}
