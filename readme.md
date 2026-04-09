@@ -14,7 +14,7 @@
 
 <!-- short-description -->
 
-**A Lit web component.**
+**A web-based implementation of Wolfram's one-dimensional cellular automata.**
 
 <!-- /short-description -->
 
@@ -45,31 +45,6 @@ You can also import the class directly for subclassing or programmatic use:
 ```ts
 import { CadNauseam } from 'cad-nauseam'
 ```
-
-## Development
-
-```sh
-pnpm install
-pnpm dev   # dev playground with HMR
-pnpm test  # run tests
-pnpm build # build library + type declarations to dist/
-```
-
-## Maintainers
-
-_List maintainer(s) for a repository, along with one way of contacting them (e.g. GitHub link or email)._
-
-## Acknowledgments
-
-_State anyone or anything that significantly helped with the development of your project. State public contact hyper-links if applicable._
-
-<!-- contributing -->
-
-## Contributing
-
-[Issues](https://github.com/kitschpatrol/cad-nauseam/issues) and pull requests are welcome.
-
-<!-- /contributing -->
 
 <!-- license -->
 

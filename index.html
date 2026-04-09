@@ -5,15 +5,20 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>cad-nauseam dev playground</title>
 		<style>
+			html {
+				overflow-y: scroll;
+			}
+
 			html,
 			body {
 				block-size: 100%;
 				margin: 0;
+				background-color: red;
 			}
 		</style>
 	</head>
 	<body>
-		<cad-nauseam></cad-nauseam>
+		<cad-nauseam page-scroll="true" sync-hash="true"></cad-nauseam>
 		<script type="module" src="/src/cad-nauseam.ts"></script>
 	</body>
 </html>

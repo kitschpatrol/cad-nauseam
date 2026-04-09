@@ -31,9 +31,10 @@ function externalIcon() {
  * Importing this module self-registers `<cad-nauseam>`.
  *
  * Events dispatched by the element:
- * - `cad-rule-change` — `CustomEvent<{ rule: number }>` fired whenever the
- *   active rule number changes (UI toggle, number input, property assignment,
- *   or hash navigation).
+ *
+ * - `cad-rule-change` — `CustomEvent<{ rule: number }>` fired whenever the active
+ *   rule number changes (UI toggle, number input, property assignment, or hash
+ *   navigation).
  * - `cad-running-change` — `CustomEvent<{ running: boolean }>` fired when the
  *   play/pause state flips.
  */
@@ -41,8 +42,10 @@ function externalIcon() {
 export class CadNauseam extends LitElement {
 	static override styles = css`
 		:host {
-			display: block;
-			position: relative;
+			display: grid;
+			grid-template-areas: 'stack';
+			grid-template-columns: minmax(0, 1fr);
+			grid-template-rows: auto;
 			box-sizing: border-box;
 			block-size: 100%;
 			overflow: auto;
@@ -53,6 +56,7 @@ export class CadNauseam extends LitElement {
 		}
 
 		:host([page-scroll]) {
+			display: block;
 			block-size: auto;
 			overflow: visible;
 		}
@@ -64,8 +68,9 @@ export class CadNauseam extends LitElement {
 		}
 
 		pre {
+			grid-area: stack;
 			margin: 0;
-			padding-block-start: 1em;
+			padding: 0;
 			font-family: inherit;
 			font-size: inherit;
 			line-height: var(--cad-line-height, 0.8em);
@@ -73,16 +78,22 @@ export class CadNauseam extends LitElement {
 		}
 
 		.control-panel {
+			grid-area: stack;
+			align-self: start;
+			justify-self: start;
 			position: sticky;
 			inset-block-start: 20px;
-			inset-inline-start: 20px;
 			z-index: 1;
 			inline-size: max-content;
-			padding-inline-start: 20px;
+			margin-block-start: 20px;
+			margin-inline-start: 20px;
 		}
 
 		:host([page-scroll]) .control-panel {
 			position: fixed;
+			inset-block-start: 20px;
+			inset-inline-start: 20px;
+			margin: 0;
 		}
 
 		h1 {
@@ -230,8 +241,8 @@ export class CadNauseam extends LitElement {
 	isRunning = true
 
 	/**
-	 * Maximum rows retained before the oldest are dropped. `0` (default)
-	 * matches the original — unbounded, memory grows linearly with runtime.
+	 * Maximum rows retained before the oldest are dropped. `0` (default) matches
+	 * the original — unbounded, memory grows linearly with runtime.
 	 */
 	@property({ attribute: 'max-rows', type: Number }) maxRows = 0
 

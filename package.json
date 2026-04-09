@@ -1,11 +1,11 @@
 {
 	"name": "cad-nauseam",
 	"version": "0.0.0",
-	"description": "A Lit web component.",
+	"private": true,
+	"description": "A web-based implementation of Wolfram's one-dimensional cellular automata.",
 	"keywords": [
-		"lit",
-		"web-component",
-		"custom-element"
+		"wolfram",
+		"cellular-automata"
 	],
 	"homepage": "https://github.com/kitschpatrol/cad-nauseam",
 	"bugs": "https://github.com/kitschpatrol/cad-nauseam/issues",
