@@ -36,8 +36,8 @@ function tscDtsPlugin(): Plugin {
 export default defineConfig({
 	build: {
 		lib: {
-			entry: fileURLToPath(new URL('src/demo-component.ts', import.meta.url)),
-			fileName: 'demo-component',
+			entry: fileURLToPath(new URL('src/cad-nauseam.ts', import.meta.url)),
+			fileName: 'cad-nauseam',
 			formats: ['es'],
 		},
 		minify: false,

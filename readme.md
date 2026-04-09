@@ -1,14 +1,14 @@
 <!-- title -->
 
-# demo-component
+# cad-nauseam
 
 <!-- /title -->
 
 <!-- badges -->
 
-[![NPM Package demo-component](https://img.shields.io/npm/v/demo-component.svg)](https://npmjs.com/package/demo-component)
+[![NPM Package cad-nauseam](https://img.shields.io/npm/v/cad-nauseam.svg)](https://npmjs.com/package/cad-nauseam)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![CI](https://github.com/kitschpatrol/demo-component/actions/workflows/ci.yml/badge.svg)](https://github.com/kitschpatrol/demo-component/actions/workflows/ci.yml)
+[![CI](https://github.com/kitschpatrol/cad-nauseam/actions/workflows/ci.yml/badge.svg)](https://github.com/kitschpatrol/cad-nauseam/actions/workflows/ci.yml)
 
 <!-- /badges -->
 
@@ -20,32 +20,30 @@
 
 ## Overview
 
-A single `<demo-component>` Lit web component, published as an ESM-only NPM package.
+A single `<cad-nauseam>` Lit web component, published as an ESM-only NPM package.
 
 ## Usage
 
 Install alongside `lit` (which is declared as a peer dependency):
 
 ```sh
-pnpm add demo-component lit
+pnpm add cad-nauseam lit
 ```
 
 Then import the component — importing the module self-registers the custom element:
 
 ```ts
-import 'demo-component'
+import 'cad-nauseam'
 ```
 
 ```html
-<demo-component label="Hello CAD">
-  <p>Slotted content here.</p>
-</demo-component>
+<cad-nauseam rule="30"></cad-nauseam>
 ```
 
 You can also import the class directly for subclassing or programmatic use:
 
 ```ts
-import { DemoComponent } from 'demo-component'
+import { CadNauseam } from 'cad-nauseam'
 ```
 
 ## Development
@@ -69,7 +67,7 @@ _State anyone or anything that significantly helped with the development of your
 
 ## Contributing
 
-[Issues](https://github.com/kitschpatrol/demo-component/issues) and pull requests are welcome.
+[Issues](https://github.com/kitschpatrol/cad-nauseam/issues) and pull requests are welcome.
 
 <!-- /contributing -->
 

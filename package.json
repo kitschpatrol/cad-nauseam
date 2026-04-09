@@ -1,5 +1,5 @@
 {
-	"name": "demo-component",
+	"name": "cad-nauseam",
 	"version": "0.0.0",
 	"description": "A Lit web component.",
 	"keywords": [
@@ -7,11 +7,11 @@
 		"web-component",
 		"custom-element"
 	],
-	"homepage": "https://github.com/kitschpatrol/demo-component",
-	"bugs": "https://github.com/kitschpatrol/demo-component/issues",
+	"homepage": "https://github.com/kitschpatrol/cad-nauseam",
+	"bugs": "https://github.com/kitschpatrol/cad-nauseam/issues",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/kitschpatrol/demo-component.git"
+		"url": "git+https://github.com/kitschpatrol/cad-nauseam.git"
 	},
 	"license": "MIT",
 	"author": {
@@ -20,18 +20,18 @@
 		"url": "https://ericmika.com"
 	},
 	"sideEffects": [
-		"./dist/demo-component.js"
+		"./dist/cad-nauseam.js"
 	],
 	"type": "module",
 	"exports": {
 		".": {
-			"types": "./dist/demo-component.d.ts",
-			"default": "./dist/demo-component.js"
+			"types": "./dist/cad-nauseam.d.ts",
+			"default": "./dist/cad-nauseam.js"
 		}
 	},
-	"main": "./dist/demo-component.js",
-	"module": "./dist/demo-component.js",
-	"types": "./dist/demo-component.d.ts",
+	"main": "./dist/cad-nauseam.js",
+	"module": "./dist/cad-nauseam.js",
+	"types": "./dist/cad-nauseam.d.ts",
 	"files": [
 		"dist",
 		"src"
