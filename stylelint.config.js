@@ -1,3 +1,5 @@
 import { stylelintConfig } from '@kitschpatrol/stylelint-config'
 
-export default stylelintConfig()
+export default stylelintConfig({
+	ignoreFiles: ['archive/**'],
+})

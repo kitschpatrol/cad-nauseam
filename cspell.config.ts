@@ -1,6 +1,6 @@
 import { cspellConfig } from '@kitschpatrol/cspell-config'
 
 export default cspellConfig({
-	ignorePaths: ['scratch/**'],
+	ignorePaths: ['archive/**'],
 	words: ['inputmode'],
 })
