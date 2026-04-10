@@ -1,13 +1,13 @@
 {
 	"name": "cad-nauseam",
-	"version": "0.0.0",
+	"version": "1.0.0",
 	"private": true,
 	"description": "A web-based implementation of Wolfram's one-dimensional cellular automata.",
 	"keywords": [
 		"wolfram",
 		"cellular-automata"
 	],
-	"homepage": "https://github.com/kitschpatrol/cad-nauseam",
+	"homepage": "https://frontiernerds.com/cad-nauseam",
 	"bugs": "https://github.com/kitschpatrol/cad-nauseam/issues",
 	"repository": {
 		"type": "git",
@@ -49,10 +49,10 @@
 		"test": "vitest run"
 	},
 	"devDependencies": {
-		"@kitschpatrol/shared-config": "^7.2.0",
+		"@kitschpatrol/shared-config": "^7.4.1",
 		"@types/node": "~20.19.39",
 		"bumpp": "^11.0.1",
-		"happy-dom": "^20.8.9",
+		"happy-dom": "^20.9.0",
 		"lit": "^3.3.2",
 		"poptab": "^1.1.0",
 		"shx": "^0.4.0",

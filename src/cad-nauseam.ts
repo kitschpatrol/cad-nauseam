@@ -14,6 +14,9 @@ const MAX_RULE = 255
 /** Total number of rule switches (one per 3-cell neighborhood state). */
 const RULE_COUNT = 8
 
+/** Matches strings made entirely of ASCII digits, used to filter rule input. */
+const DIGITS_ONLY = /^\d+$/
+
 /** Shared external-link icon used inside About / Rule info buttons. */
 function externalIcon() {
 	return html`
@@ -326,10 +329,11 @@ export class CadNauseam extends LitElement {
 						Rule
 						<input
 							class="number-box"
-							type="number"
+							type="text"
 							inputmode="numeric"
-							min="0"
-							max=${MAX_RULE}
+							pattern="[0-9]*"
+							maxlength="3"
+							@beforeinput=${this.#onRuleBeforeInput}
 							@change=${this.#onRuleChange}
 						/>
 					</label>
@@ -471,6 +475,18 @@ export class CadNauseam extends LitElement {
 
 	readonly #onReseed = (): void => {
 		this.#seed()
+	}
+
+	readonly #onRuleBeforeInput = (event: Event): void => {
+		// Block any insertion that isn't all digits, so the rule input rejects
+		// "e", "+", "-", "." and the rest of the characters that `type="number"`
+		// would otherwise allow. Deletions/composition events have `data === null`
+		// and are passed through.
+		if (!(event instanceof InputEvent)) return
+		const { data } = event
+		if (data !== null && !DIGITS_ONLY.test(data)) {
+			event.preventDefault()
+		}
 	}
 
 	readonly #onRuleChange = (event: Event): void => {
