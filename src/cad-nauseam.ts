@@ -84,9 +84,10 @@ export class CadNauseam extends LitElement {
 			position: sticky;
 			inset-block-start: 20px;
 			z-index: 1;
-			inline-size: max-content;
+			inline-size: 90px;
 			margin-block-start: 20px;
 			margin-inline-start: 20px;
+			line-height: normal;
 		}
 
 		:host([page-scroll]) .control-panel {
@@ -100,31 +101,45 @@ export class CadNauseam extends LitElement {
 			display: inline;
 			margin: 0;
 			font-size: inherit;
-			font-weight: normal;
+			font-weight: bold;
 		}
 
 		.rule-box {
-			inline-size: 88px;
-			margin-block: 10px;
-			padding: 4px 4px 8px;
+			inline-size: 100%;
+			block-size: 202px;
+			padding: 5px 4px 0 4px;
 			background: var(--cad-bg, white);
-			border: var(--cad-border, 1px solid currentColor);
+			/* Outline (not border) so the grid inside can span the full 90px
+			   and each rule-control cell lands on exactly 50% of the panel. */
+			outline: 1px solid currentColor;
+			outline-offset: -1px;
+			margin-block-end: 10px;
+			line-height: 20px;
 		}
 
 		.rule-box-label {
 			display: flex;
-			align-items: center;
-			gap: 6px;
+			align-items: baseline;
+			justify-content: space-between;
+			block-size: 16px;
+			line-height: 14px;
+			/* Match the button's 5px content-edge (1px border + 4px padding-left).
+			   Rule-box has no border but 4px padding, so shift by 1px more. */
+			padding-inline-start: 1px;
+			padding-inline-end: 1px;
 		}
 
 		.number-box {
-			inline-size: 40px;
+			inline-size: 30px;
+			box-sizing: border-box;
+			block-size: 16px;
 			margin: 0;
-			padding: 0 2px;
+			padding: 0 3px;
 			color: inherit;
 			background: var(--cad-bg, white);
 			border: 1px solid currentColor;
 			font: inherit;
+			line-height: 14px;
 			text-align: right;
 			appearance: textfield;
 		}
@@ -141,15 +156,17 @@ export class CadNauseam extends LitElement {
 
 		.rule-grid {
 			display: grid;
-			grid-template-columns: repeat(2, 36px);
-			justify-content: center;
-			margin-block-start: 8px;
+			grid-template-columns: 1fr 1fr;
+			grid-template-rows: repeat(4, 44px);
+			/* Extend past the rule-box's horizontal padding so the grid spans
+			   the full 90px, making each cell exactly 45px (50% of 90). */
+			margin-inline: -4px;
+			margin-block-start: 5px;
 		}
 
 		.rule-control {
 			position: relative;
-			inline-size: 36px;
-			block-size: 36px;
+			block-size: 44px;
 			cursor: pointer;
 		}
 
@@ -159,8 +176,8 @@ export class CadNauseam extends LitElement {
 
 		.rule-control .box {
 			position: absolute;
-			inline-size: 8px;
-			block-size: 8px;
+			inline-size: 12px;
+			block-size: 12px;
 			background: var(--cad-bg, white);
 			border: 1px solid currentColor;
 		}
@@ -174,45 +191,37 @@ export class CadNauseam extends LitElement {
 		}
 
 		.rule-control .a {
-			inset-block-start: 7px;
-			inset-inline-start: 4px;
+			inset-inline-start: 5px;
+			inset-block-start: 9px;
 		}
 
 		.rule-control .b {
-			inset-block-start: 7px;
-			inset-inline-start: 14px;
+			inset-inline-start: 16px;
+			inset-block-start: 9px;
 		}
 
 		.rule-control .c {
-			inset-block-start: 7px;
-			inset-inline-start: 24px;
+			inset-inline-start: 27px;
+			inset-block-start: 9px;
 		}
 
 		.rule-control .switch {
-			inset-block-start: 18px;
-			inset-inline-start: 14px;
-		}
-
-		.rule-control:hover .switch {
-			background: var(--cad-bg, white);
-		}
-
-		.rule-control.on .switch {
-			background: currentColor;
+			inset-inline-start: 16px;
+			inset-block-start: 20px;
 		}
 
 		.button {
 			display: flex;
 			align-items: center;
-			gap: 6px;
-			inline-size: 104px;
-			block-size: 24px;
-			margin-block-end: 8px;
-			padding: 0 8px;
+			inline-size: 100%;
+			block-size: 26px;
+			margin-block-end: 10px;
+			padding: 2px 0 2px 4px;
 			color: inherit;
 			background: var(--cad-bg, white);
 			border: var(--cad-border, 1px solid currentColor);
 			font: inherit;
+			line-height: 20px;
 			text-align: left;
 			text-decoration: none;
 			cursor: pointer;
@@ -224,8 +233,10 @@ export class CadNauseam extends LitElement {
 			background: var(--cad-fg, black);
 		}
 
-		svg {
-			vertical-align: middle;
+		.button svg {
+			/* Push the external-link icon to the right edge of the button. */
+			margin-inline-start: auto;
+			margin-inline-end: 4px;
 			fill: currentColor;
 		}
 	`
@@ -295,6 +306,8 @@ export class CadNauseam extends LitElement {
 		return html`
 			<div class="control-panel" part="control-panel">
 				<h1>CAd nauseam</h1>
+				<br />
+				<br />
 				<div class="rule-box" part="rule-box">
 					<label class="rule-box-label">
 						Rule
@@ -315,6 +328,7 @@ export class CadNauseam extends LitElement {
 				<button type="button" class="button" part="button" @click=${this.#onTogglePlay}>
 					${this.isRunning ? 'Stop' : 'Go'}
 				</button>
+				<br />
 				<a
 					class="button"
 					part="button"
