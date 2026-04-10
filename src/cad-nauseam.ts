@@ -48,7 +48,8 @@ export class CadNauseam extends LitElement {
 			grid-template-rows: auto;
 			box-sizing: border-box;
 			block-size: 100%;
-			overflow: auto;
+			overflow-x: clip;
+			overflow-y: auto;
 			color: var(--cad-fg, black);
 			background: var(--cad-bg, white);
 			font-family: var(--cad-font, 'Courier New', Courier, monospace);
@@ -69,12 +70,13 @@ export class CadNauseam extends LitElement {
 
 		pre {
 			grid-area: stack;
+			justify-self: center;
+			inline-size: max-content;
 			margin: 0;
 			padding: 0;
 			font-family: inherit;
 			font-size: inherit;
 			line-height: var(--cad-line-height, 0.8em);
-			text-align: center;
 		}
 
 		.control-panel {
@@ -278,6 +280,17 @@ export class CadNauseam extends LitElement {
 	#rafId: number | undefined
 	#ruleInput: HTMLInputElement | undefined
 	#thisGen: Uint8Array = new Uint8Array(this.cols)
+
+	override connectedCallback(): void {
+		super.connectedCallback()
+		// Apply the URL hash synchronously before the first render so the
+		// initial rule reflects e.g. `#154`. If we waited for `updated()`
+		// the rule branch would fire first with the default value and write
+		// `#90` over the user's hash before we ever read it.
+		if (this.shouldSyncHash) {
+			this.#applyHash()
+		}
+	}
 
 	override disconnectedCallback(): void {
 		super.disconnectedCallback()
