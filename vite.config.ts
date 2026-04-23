@@ -1,7 +1,10 @@
 import type { Plugin } from 'vitest/config'
 import { spawnSync } from 'node:child_process'
+import { createRequire } from 'node:module'
 import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vitest/config'
+
+const require = createRequire(import.meta.url)
 
 /**
  * Emit `.d.ts` + `.d.ts.map` files via `tsc` as part of the Vite build.
@@ -18,7 +21,8 @@ function tscDtsPlugin(): Plugin {
 		apply: 'build',
 		closeBundle: {
 			handler() {
-				const result = spawnSync('tsc', ['-p', 'tsconfig.build.json'], {
+				const tscBin = require.resolve('typescript/bin/tsc')
+				const result = spawnSync(process.execPath, [tscBin, '-p', 'tsconfig.build.json'], {
 					shell: false,
 					stdio: 'inherit',
 				})
