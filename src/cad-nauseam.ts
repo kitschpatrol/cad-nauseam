@@ -60,9 +60,14 @@ export class CadNauseam extends LitElement {
 		}
 
 		:host([page-scroll]) {
-			display: block;
 			block-size: auto;
-			overflow: visible;
+			/* Keep grid layout so the <pre>'s justify-self: center keeps it
+			   centered even when wider than the viewport (overflow extends
+			   equally on both sides). overflow-x: clip prevents that overflow
+			   from producing a horizontal page scrollbar; overflow-y: visible
+			   lets the page itself handle vertical scrolling. */
+			overflow-x: clip;
+			overflow-y: visible;
 		}
 
 		*,
@@ -76,7 +81,7 @@ export class CadNauseam extends LitElement {
 			justify-self: center;
 			inline-size: max-content;
 			margin: 0;
-			padding: 0;
+			padding: 1rem 0 0;
 			font-family: inherit;
 			font-size: inherit;
 			line-height: var(--cad-line-height, 0.8em);
