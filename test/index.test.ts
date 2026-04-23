@@ -47,7 +47,9 @@ describe('cad-nauseam', () => {
 		const controls = element.shadowRoot?.querySelectorAll('.rule-control') ?? []
 		const onBits: number[] = []
 		for (const [index, node] of [...controls].entries()) {
-			if (node.classList.contains('on')) onBits.push(7 - index)
+			if (node.classList.contains('on')) {
+				onBits.push(7 - index)
+			}
 		}
 		expect(onBits.toSorted((a, b) => a - b)).toEqual([1, 3, 4, 6])
 	})
@@ -55,7 +57,9 @@ describe('cad-nauseam', () => {
 	it('clamps rule values above 255 via the number input', async () => {
 		const element = await mount()
 		const input = element.shadowRoot?.querySelector('.number-box')
-		if (!(input instanceof HTMLInputElement)) throw new Error('input not found')
+		if (!(input instanceof HTMLInputElement)) {
+			throw new TypeError('input not found')
+		}
 		input.value = '999'
 		input.dispatchEvent(new Event('change', { bubbles: true }))
 		await element.updateComplete
@@ -68,7 +72,9 @@ describe('cad-nauseam', () => {
 			current.rule = 30
 		})
 		const input = element.shadowRoot?.querySelector('.number-box')
-		if (!(input instanceof HTMLInputElement)) throw new Error('input not found')
+		if (!(input instanceof HTMLInputElement)) {
+			throw new TypeError('input not found')
+		}
 		input.value = ''
 		input.dispatchEvent(new Event('change', { bubbles: true }))
 		await element.updateComplete
@@ -81,7 +87,9 @@ describe('cad-nauseam', () => {
 		})
 		const ruleEvents: number[] = []
 		element.addEventListener('cad-rule-change', (event) => {
-			if (!(event instanceof CustomEvent)) return
+			if (!(event instanceof CustomEvent)) {
+				return
+			}
 			// eslint-disable-next-line prefer-destructuring
 			const detail: unknown = event.detail
 			if (isRecord(detail) && typeof detail.rule === 'number') {
@@ -90,9 +98,13 @@ describe('cad-nauseam', () => {
 		})
 		// Click the last rule-control (UI index 7 → neighborhood bit 0 → rule = 1).
 		const controls = element.shadowRoot?.querySelectorAll('.rule-control')
-		if (!controls || controls.length === 0) throw new Error('rule-control not found')
+		if (!controls || controls.length === 0) {
+			throw new Error('rule-control not found')
+		}
 		const last = [...controls].at(-1)
-		if (!(last instanceof HTMLElement)) throw new Error('rule-control not an element')
+		if (!(last instanceof HTMLElement)) {
+			throw new TypeError('rule-control not an element')
+		}
 		last.click()
 		await element.updateComplete
 		expect(element.rule).toBe(1)
@@ -103,7 +115,9 @@ describe('cad-nauseam', () => {
 		const element = await mount()
 		let runningFromEvent: boolean | undefined
 		element.addEventListener('cad-running-change', (event) => {
-			if (!(event instanceof CustomEvent)) return
+			if (!(event instanceof CustomEvent)) {
+				return
+			}
 			// eslint-disable-next-line prefer-destructuring
 			const detail: unknown = event.detail
 			if (isRecord(detail) && typeof detail.running === 'boolean') {
@@ -123,7 +137,9 @@ describe('cad-nauseam', () => {
 	it('reseed button clears the grid', async () => {
 		const element = await mount()
 		const pre = element.shadowRoot?.querySelector('pre')
-		if (!pre) throw new Error('pre not found')
+		if (!pre) {
+			throw new Error('pre not found')
+		}
 		// Manually dirty the grid to simulate prior ticks.
 		pre.append('garbage\n')
 		const buttons = element.shadowRoot?.querySelectorAll('button') ?? []
@@ -134,7 +150,9 @@ describe('cad-nauseam', () => {
 				break
 			}
 		}
-		if (!reseedButton) throw new Error('reseed button not found')
+		if (!reseedButton) {
+			throw new Error('reseed button not found')
+		}
 		reseedButton.click()
 		await element.updateComplete
 		expect(pre.textContent).toBe('')

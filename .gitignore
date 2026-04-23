@@ -22,3 +22,6 @@ vendor/
 
 # Customizations
 .claude/
+/site/
+/.certs/
+/.wrangler/

@@ -315,7 +315,9 @@ export class CadNauseam extends LitElement {
 		}
 
 		this.#seed()
-		if (this.isRunning) this.#startLoop()
+		if (this.isRunning) {
+			this.#startLoop()
+		}
 	}
 
 	override render() {
@@ -389,8 +391,11 @@ export class CadNauseam extends LitElement {
 		}
 
 		if (changed.has('isRunning')) {
-			if (this.isRunning) this.#startLoop()
-			else this.#stopLoop()
+			if (this.isRunning) {
+				this.#startLoop()
+			} else {
+				this.#stopLoop()
+			}
 			this.dispatchEvent(
 				new CustomEvent('cad-running-change', {
 					bubbles: true,
@@ -414,7 +419,9 @@ export class CadNauseam extends LitElement {
 
 	#appendRow(): void {
 		const pre = this.#pre
-		if (!pre) return
+		if (!pre) {
+			return
+		}
 		const current = this.#thisGen
 		const { cols } = this
 		let row = ''
@@ -431,9 +438,13 @@ export class CadNauseam extends LitElement {
 
 	#applyHash(): void {
 		const hash = globalThis.location.hash.slice(1)
-		if (hash.length === 0) return
+		if (hash.length === 0) {
+			return
+		}
 		const parsed = Number.parseInt(hash, 10)
-		if (!Number.isFinite(parsed)) return
+		if (!Number.isFinite(parsed)) {
+			return
+		}
 		this.rule = Math.max(0, Math.min(MAX_RULE, parsed))
 	}
 
@@ -482,7 +493,9 @@ export class CadNauseam extends LitElement {
 		// "e", "+", "-", "." and the rest of the characters that `type="number"`
 		// would otherwise allow. Deletions/composition events have `data === null`
 		// and are passed through.
-		if (!(event instanceof InputEvent)) return
+		if (!(event instanceof InputEvent)) {
+			return
+		}
 		const { data } = event
 		if (data !== null && !DIGITS_ONLY.test(data)) {
 			event.preventDefault()
@@ -491,7 +504,9 @@ export class CadNauseam extends LitElement {
 
 	readonly #onRuleChange = (event: Event): void => {
 		const input = event.currentTarget
-		if (!(input instanceof HTMLInputElement)) return
+		if (!(input instanceof HTMLInputElement)) {
+			return
+		}
 		const parsed = Number.parseInt(input.value, 10)
 		const next = Number.isFinite(parsed) ? Math.max(0, Math.min(MAX_RULE, parsed)) : this.rule
 		input.value = String(next)
@@ -538,21 +553,29 @@ export class CadNauseam extends LitElement {
 	}
 
 	#startLoop(): void {
-		if (this.#rafId !== undefined) return
-		if (typeof globalThis.requestAnimationFrame !== 'function') return
+		if (this.#rafId !== undefined) {
+			return
+		}
+		if (typeof globalThis.requestAnimationFrame !== 'function') {
+			return
+		}
 		this.#lastTick = 0
 		this.#rafId = globalThis.requestAnimationFrame(this.#tick)
 	}
 
 	#stopLoop(): void {
-		if (this.#rafId === undefined) return
+		if (this.#rafId === undefined) {
+			return
+		}
 		globalThis.cancelAnimationFrame(this.#rafId)
 		this.#rafId = undefined
 	}
 
 	#syncRuleInput(): void {
 		const input = this.#ruleInput
-		if (!input) return
+		if (!input) {
+			return
+		}
 		const { renderRoot } = this
 		const isFocused = renderRoot instanceof ShadowRoot && renderRoot.activeElement === input
 		if (!isFocused) {
@@ -562,8 +585,12 @@ export class CadNauseam extends LitElement {
 
 	readonly #tick = (timestamp: number): void => {
 		this.#rafId = globalThis.requestAnimationFrame(this.#tick)
-		if (!this.isRunning) return
-		if (timestamp - this.#lastTick < this.interval) return
+		if (!this.isRunning) {
+			return
+		}
+		if (timestamp - this.#lastTick < this.interval) {
+			return
+		}
 		this.#lastTick = timestamp
 		this.#appendRow()
 		this.#generate()
@@ -575,7 +602,9 @@ export class CadNauseam extends LitElement {
 	}
 
 	#updateHash(): void {
-		if (!this.shouldSyncHash) return
+		if (!this.shouldSyncHash) {
+			return
+		}
 		const desired = `#${this.rule}`
 		if (globalThis.location.hash !== desired) {
 			globalThis.history.replaceState(undefined, '', desired)

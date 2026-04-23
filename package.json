@@ -1,6 +1,6 @@
 {
 	"name": "cad-nauseam",
-	"version": "1.0.0",
+	"version": "0.0.0",
 	"private": true,
 	"description": "A web-based implementation of Wolfram's one-dimensional cellular automata.",
 	"keywords": [
@@ -37,33 +37,35 @@
 		"src"
 	],
 	"scripts": {
-		"bench": "vitest bench --run --compare test/benchmarks/baseline.json",
-		"bench:baseline": "vitest bench --run --outputJson test/benchmarks/baseline.json",
-		"build": "vite build",
+		"build": "vite build && vite build --config vite.config.site.ts && tsx ./scripts/version.ts > ./site/cad-nauseam/version.json",
 		"clean": "shx rm -f pnpm-lock.yaml && git clean -fdX -e !.claude/",
 		"dev": "poptab && vite",
 		"fix": "ksc fix",
+		"init": "mkdir -p .certs && test -f .certs/localhost.pem || mkcert -cert-file .certs/localhost.pem -key-file .certs/localhost-key.pem localhost 127.0.0.1 ::1",
 		"lint": "ksc lint",
 		"preview": "poptab && vite preview",
-		"release": "bumpp --commit 'Release: %s'",
+		"preview:cloudflare": "poptab && open https://localhost:8787 && wrangler dev --show-interactive-dev-session false --https-cert-path .certs/localhost.pem --https-key-path .certs/localhost-key.pem",
+		"release": "bumpp --commit 'Release: %s' --push false && pnpm build && wrangler deploy",
 		"test": "vitest run"
 	},
 	"devDependencies": {
-		"@kitschpatrol/shared-config": "^7.4.1",
+		"@kitschpatrol/shared-config": "^7.5.0",
 		"@types/node": "~20.19.39",
 		"bumpp": "^11.0.1",
 		"happy-dom": "^20.9.0",
 		"lit": "^3.3.2",
 		"poptab": "^1.1.0",
 		"shx": "^0.4.0",
+		"tsx": "^4.21.0",
 		"typescript": "~5.9.3",
-		"vite": "^8.0.8",
-		"vitest": "^4.1.4"
+		"vite": "^8.0.9",
+		"vitest": "^4.1.5",
+		"wrangler": "^4.84.1"
 	},
 	"peerDependencies": {
 		"lit": "^3.0.0"
 	},
-	"packageManager": "pnpm@10.33.0",
+	"packageManager": "pnpm@10.33.1",
 	"devEngines": {
 		"runtime": {
 			"name": "node",

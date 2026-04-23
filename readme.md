@@ -6,7 +6,6 @@
 
 <!-- badges -->
 
-[![NPM Package cad-nauseam](https://img.shields.io/npm/v/cad-nauseam.svg)](https://npmjs.com/package/cad-nauseam)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![CI](https://github.com/kitschpatrol/cad-nauseam/actions/workflows/ci.yml/badge.svg)](https://github.com/kitschpatrol/cad-nauseam/actions/workflows/ci.yml)
 
@@ -20,36 +19,20 @@
 
 ## Overview
 
-A single `<cad-nauseam>` Lit web component, published as an ESM-only NPM package.
+This is a modernized version of a 2010 project named CAd nauseam, which was an implementation of Wolfram's elementary one-dimensional cellular automata rendered purely as plain text in the web browser to allow for scroll-back exploration and cut / paste of patterns of interest.
 
-## Usage
+You can see play with the live version [here](https://frontiernerds.com/cad-nauseam), and read more about the original intent [on the Frontier Nerds blog](https://frontiernerds.com/ascii-ca).
 
-Install alongside `lit` (which is declared as a peer dependency):
+The original JavaScript + [MooTools](https://mootools.net) version has been ported to a web component in [Lit](https://lit.dev) and vanilla TypeScript.
 
-```sh
-pnpm add cad-nauseam lit
-```
+Functionally, it's identical to the original, it just runs slightly faster.
 
-Then import the component — importing the module self-registers the custom element:
-
-```ts
-import 'cad-nauseam'
-```
-
-```html
-<cad-nauseam rule="30"></cad-nauseam>
-```
-
-You can also import the class directly for subclassing or programmatic use:
-
-```ts
-import { CadNauseam } from 'cad-nauseam'
-```
+The original 2010 source code is preserved in this repository in the `/archive` folder.
 
 <!-- license -->
 
 ## License
 
-[MIT](license.txt) © Eric Mika
+[MIT](license.txt) © [Eric Mika](https://ericmika.com)
 
 <!-- /license -->
