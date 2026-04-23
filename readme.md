@@ -19,9 +19,9 @@
 
 ## Overview
 
-This is a modernized version of a 2010 project named CAd nauseam, which was an implementation of Wolfram's elementary one-dimensional cellular automata rendered purely as plain text in the web browser to allow for scroll-back exploration and cut / paste of patterns of interest.
+This is a modern port of a 2010 project named CAd nauseam, which was an implementation of Wolfram's elementary one-dimensional cellular automata rendered purely as plain text in the web browser to allow for scroll-back exploration and cut / paste of patterns of interest.
 
-You can see play with the live version [here](https://frontiernerds.com/cad-nauseam), and read more about the original intent [on the Frontier Nerds blog](https://frontiernerds.com/ascii-ca).
+You can play with the live version [here](https://frontiernerds.com/cad-nauseam), and read more about the original intent [on the Frontier Nerds blog](https://frontiernerds.com/ascii-ca).
 
 The original JavaScript + [MooTools](https://mootools.net) version has been ported to a web component in [Lit](https://lit.dev) and vanilla TypeScript.
 
