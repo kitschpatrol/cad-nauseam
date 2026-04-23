@@ -1,6 +1,6 @@
 {
 	"name": "cad-nauseam",
-	"version": "0.0.0",
+	"version": "1.0.0",
 	"private": true,
 	"description": "A web-based implementation of Wolfram's one-dimensional cellular automata.",
 	"keywords": [
@@ -45,7 +45,7 @@
 		"lint": "ksc lint",
 		"preview": "poptab && vite preview",
 		"preview:cloudflare": "poptab && open https://localhost:8787 && wrangler dev --show-interactive-dev-session false --https-cert-path .certs/localhost.pem --https-key-path .certs/localhost-key.pem",
-		"release": "bumpp --commit 'Release: %s' --push false && pnpm build && wrangler deploy",
+		"release": "bumpp --commit 'Release: %s' && pnpm build && wrangler deploy",
 		"test": "vitest run"
 	},
 	"devDependencies": {
