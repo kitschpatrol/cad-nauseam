@@ -49,23 +49,25 @@
 		"test": "vitest run"
 	},
 	"devDependencies": {
-		"@kitschpatrol/shared-config": "^7.5.0",
-		"@types/node": "~20.19.39",
-		"bumpp": "^11.0.1",
+		"@kitschpatrol/shared-config": "^7.6.2",
+		"@types/node": "~20.19.41",
+		"bumpp": "^11.1.0",
 		"happy-dom": "^20.9.0",
-		"lit": "^3.3.2",
-		"poptab": "^1.1.0",
+		"lit": "^3.3.3",
+		"node-addon-api": "^8.7.0",
+		"node-gyp": "^12.3.0",
+		"poptab": "^1.1.1",
 		"shx": "^0.4.0",
-		"tsx": "^4.21.0",
+		"tsx": "^4.22.1",
 		"typescript": "~5.9.3",
-		"vite": "^8.0.10",
-		"vitest": "^4.1.5",
-		"wrangler": "^4.84.1"
+		"vite": "^8.0.13",
+		"vitest": "^4.1.6",
+		"wrangler": "^4.92.0"
 	},
 	"peerDependencies": {
 		"lit": "^3.0.0"
 	},
-	"packageManager": "pnpm@10.33.2",
+	"packageManager": "pnpm@11.1.2",
 	"devEngines": {
 		"runtime": {
 			"name": "node",

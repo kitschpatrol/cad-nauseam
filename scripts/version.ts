@@ -58,6 +58,7 @@ async function readPackageUp(startDirectory: string): Promise<null | Record<stri
 			if (parent === directory) {
 				return null
 			}
+
 			directory = parent
 		}
 	}
@@ -67,11 +68,13 @@ function parsePrerelease(version: null | string | undefined): string[] {
 	if (!version) {
 		return []
 	}
+
 	// E.g. "1.2.3-beta.1" → ["beta", "1"]
 	const hyphen = version.indexOf('-')
 	if (hyphen === -1) {
 		return []
 	}
+
 	return version.slice(hyphen + 1).split('.')
 }
 

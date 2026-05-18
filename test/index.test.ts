@@ -23,6 +23,7 @@ describe('cad-nauseam', () => {
 		for (const node of document.body.querySelectorAll('cad-nauseam')) {
 			node.remove()
 		}
+
 		if (globalThis.location.hash.length > 0) {
 			globalThis.history.replaceState(undefined, '', ' ')
 		}
@@ -51,6 +52,7 @@ describe('cad-nauseam', () => {
 				onBits.push(7 - index)
 			}
 		}
+
 		expect(onBits.toSorted((a, b) => a - b)).toEqual([1, 3, 4, 6])
 	})
 
@@ -60,6 +62,7 @@ describe('cad-nauseam', () => {
 		if (!(input instanceof HTMLInputElement)) {
 			throw new TypeError('input not found')
 		}
+
 		input.value = '999'
 		input.dispatchEvent(new Event('change', { bubbles: true }))
 		await element.updateComplete
@@ -75,6 +78,7 @@ describe('cad-nauseam', () => {
 		if (!(input instanceof HTMLInputElement)) {
 			throw new TypeError('input not found')
 		}
+
 		input.value = ''
 		input.dispatchEvent(new Event('change', { bubbles: true }))
 		await element.updateComplete
@@ -90,6 +94,7 @@ describe('cad-nauseam', () => {
 			if (!(event instanceof CustomEvent)) {
 				return
 			}
+
 			// eslint-disable-next-line prefer-destructuring
 			const detail: unknown = event.detail
 			if (isRecord(detail) && typeof detail.rule === 'number') {
@@ -101,10 +106,12 @@ describe('cad-nauseam', () => {
 		if (!controls || controls.length === 0) {
 			throw new Error('rule-control not found')
 		}
+
 		const last = [...controls].at(-1)
 		if (!(last instanceof HTMLElement)) {
 			throw new TypeError('rule-control not an element')
 		}
+
 		last.click()
 		await element.updateComplete
 		expect(element.rule).toBe(1)
@@ -118,6 +125,7 @@ describe('cad-nauseam', () => {
 			if (!(event instanceof CustomEvent)) {
 				return
 			}
+
 			// eslint-disable-next-line prefer-destructuring
 			const detail: unknown = event.detail
 			if (isRecord(detail) && typeof detail.running === 'boolean') {
@@ -140,6 +148,7 @@ describe('cad-nauseam', () => {
 		if (!pre) {
 			throw new Error('pre not found')
 		}
+
 		// Manually dirty the grid to simulate prior ticks.
 		pre.append('garbage\n')
 		const buttons = element.shadowRoot?.querySelectorAll('button') ?? []
@@ -150,9 +159,11 @@ describe('cad-nauseam', () => {
 				break
 			}
 		}
+
 		if (!reseedButton) {
 			throw new Error('reseed button not found')
 		}
+
 		reseedButton.click()
 		await element.updateComplete
 		expect(pre.textContent).toBe('')
