@@ -1,0 +1,110 @@
+html {
+  margin: 0;
+  padding: 0;
+  overflow-y: scroll;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 12px;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background: white;
+}
+pre {
+  line-height: 0.8em;
+  font-size: 12px;
+  text-align: center;
+  font-family: "Courier New", Courier, monospace;
+}
+#control-panel {
+  position: fixed;
+  left: 20px;
+  top: 20px;
+}
+#rule-box {
+  background: white;
+  width: 80px;
+  height: 202px;
+  border: 1px solid black;
+  line-height: 20px;
+  margin-bottom: 10px;
+  padding: 0 4px;
+}
+
+.rule-control {
+  width: 44px;
+  height: 44px;
+  position: absolute;
+  cursor: pointer;
+}
+.rule-control:hover {
+  background: black;
+}
+.rule-control .box {
+  width: 10px;
+  height: 10px;
+  border: 1px solid black;
+  background: white;
+  position: absolute;
+  top: 0;
+}
+.rule-control:hover .box {
+  border-color: white;
+}
+.rule-control .on {
+  background: black;
+}
+.rule-control .switch {
+  background: white;
+}
+.rule-control.on .switch {
+  background: black;
+}
+.button {
+  display: block;
+  text-decoration: none;
+  width: 85px;
+  height: 20px;
+  background: white;
+  border: 1px solid black;
+  line-height: 20px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  padding: 2px 0 2px 4px;
+}
+.button:hover {
+  background: black;
+  color: white;
+}
+
+#number-box {
+  width: 74px;
+  border: 1px solid black;
+  font-family: "Courier New", Courier, monospace;
+  width: 30px;
+  margin: 4px 0 0 17px;
+  text-align: right;
+}
+#number-box:focus {
+  outline: none;
+}
+
+a {
+  color: black;
+}
+a:hover {
+  text-decoration: none;
+}
+
+a:hover svg {
+  fill: white;
+}
+
+a svg {
+  vertical-align: middle;
+}
+
+h1 {
+  display: inline;
+  font-size: 12px;
+}

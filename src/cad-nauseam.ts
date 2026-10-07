@@ -1,7 +1,6 @@
-/* eslint-disable no-bitwise, node/no-unsupported-features/node-builtins */
+/* eslint-disable no-bitwise */
 // Bitwise operators are the natural expression for Wolfram rule decoding
-// (the rule is a packed 8-bit lookup table). `CustomEvent` is a DOM type used
-// here in browser code; the node plugin false-positives on component source.
+// (the rule is a packed 8-bit lookup table).
 
 import type { PropertyValues } from 'lit'
 import { css, html, LitElement } from 'lit'
@@ -15,6 +14,7 @@ const MAX_RULE = 255
 const RULE_COUNT = 8
 
 /** Matches strings made entirely of ASCII digits, used to filter rule input. */
+// eslint-disable-next-line require-unicode-regexp -- The `v` flag is ES2024; the build targets ES2021 browsers.
 const DIGITS_ONLY = /^\d+$/
 
 /** Shared external-link icon used inside About / Rule info buttons. */
@@ -303,10 +303,12 @@ export class CadNauseam extends LitElement {
 	override disconnectedCallback(): void {
 		super.disconnectedCallback()
 		this.#stopLoop()
-		if (this.#hasHashListener) {
-			globalThis.removeEventListener('hashchange', this.#onHashChange)
-			this.#hasHashListener = false
+		if (!this.#hasHashListener) {
+			return
 		}
+
+		removeEventListener('hashchange', this.#onHashChange)
+		this.#hasHashListener = false
 	}
 
 	override firstUpdated(): void {
@@ -413,11 +415,11 @@ export class CadNauseam extends LitElement {
 
 		if (changed.has('shouldSyncHash')) {
 			if (this.shouldSyncHash && !this.#hasHashListener) {
-				globalThis.addEventListener('hashchange', this.#onHashChange)
+				addEventListener('hashchange', this.#onHashChange)
 				this.#hasHashListener = true
 				this.#applyHash()
 			} else if (!this.shouldSyncHash && this.#hasHashListener) {
-				globalThis.removeEventListener('hashchange', this.#onHashChange)
+				removeEventListener('hashchange', this.#onHashChange)
 				this.#hasHashListener = false
 			}
 		}
@@ -445,11 +447,12 @@ export class CadNauseam extends LitElement {
 	}
 
 	#applyHash(): void {
-		const hash = globalThis.location.hash.slice(1)
+		const hash = location.hash.slice(1)
 		if (hash.length === 0) {
 			return
 		}
 
+		// eslint-disable-next-line unicorn/prefer-number-coercion -- `parseInt` keeps the leading digits of hashes like `#30abc`; `Number` would reject them.
 		const parsed = Number.parseInt(hash, 10)
 		if (!Number.isFinite(parsed)) {
 			return
@@ -460,7 +463,7 @@ export class CadNauseam extends LitElement {
 
 	#autoScroll(): void {
 		if (this.shouldPageScroll) {
-			globalThis.scrollTo(0, document.documentElement.scrollHeight)
+			scrollTo(0, document.documentElement.scrollHeight)
 		} else {
 			this.scrollTop = this.scrollHeight
 		}
@@ -471,13 +474,13 @@ export class CadNauseam extends LitElement {
 		const next = this.#nextGen
 		const { cols, rule } = this
 		// Edges are carried over unchanged (matching the original).
-		next[0] = current[0]
-		next[cols - 1] = current[cols - 1]
+		next[0] = current[0] ?? 0
+		next[cols - 1] = current[cols - 1] ?? 0
 		// Rolling 3-cell window to avoid redundant array reads.
-		let l = current[0]
-		let m = current[1]
+		let l = current[0] ?? 0
+		let m = current[1] ?? 0
 		for (let i = 1; i < cols - 1; i++) {
-			const r = current[i + 1]
+			const r = current[i + 1] ?? 0
 			next[i] = (rule >>> ((l << 2) | (m << 1) | r)) & 1
 			l = m
 			m = r
@@ -520,6 +523,7 @@ export class CadNauseam extends LitElement {
 			return
 		}
 
+		// eslint-disable-next-line unicorn/prefer-number-coercion -- Matches `#applyHash` parsing, which keeps leading digits.
 		const parsed = Number.parseInt(input.value, 10)
 		const next = Number.isFinite(parsed) ? Math.max(0, Math.min(MAX_RULE, parsed)) : this.rule
 		input.value = String(next)
@@ -567,16 +571,12 @@ export class CadNauseam extends LitElement {
 	}
 
 	#startLoop(): void {
-		if (this.#rafId !== undefined) {
-			return
-		}
-
-		if (typeof globalThis.requestAnimationFrame !== 'function') {
+		if (typeof requestAnimationFrame !== 'function' || this.#rafId !== undefined) {
 			return
 		}
 
 		this.#lastTick = 0
-		this.#rafId = globalThis.requestAnimationFrame(this.#tick)
+		this.#rafId = requestAnimationFrame(this.#tick)
 	}
 
 	#stopLoop(): void {
@@ -584,7 +584,7 @@ export class CadNauseam extends LitElement {
 			return
 		}
 
-		globalThis.cancelAnimationFrame(this.#rafId)
+		cancelAnimationFrame(this.#rafId)
 		this.#rafId = undefined
 	}
 
@@ -602,12 +602,8 @@ export class CadNauseam extends LitElement {
 	}
 
 	readonly #tick = (timestamp: number): void => {
-		this.#rafId = globalThis.requestAnimationFrame(this.#tick)
-		if (!this.isRunning) {
-			return
-		}
-
-		if (timestamp - this.#lastTick < this.interval) {
+		this.#rafId = requestAnimationFrame(this.#tick)
+		if (!this.isRunning || timestamp - this.#lastTick < this.interval) {
 			return
 		}
 
@@ -627,8 +623,8 @@ export class CadNauseam extends LitElement {
 		}
 
 		const desired = `#${this.rule}`
-		if (globalThis.location.hash !== desired) {
-			globalThis.history.replaceState(undefined, '', desired)
+		if (location.hash !== desired) {
+			history.replaceState(undefined, '', desired)
 		}
 	}
 }
