@@ -46,7 +46,7 @@ export default defineConfig({
 		},
 		minify: false,
 		rolldownOptions: {
-			external: [/^lit($|\/)/, /^@lit\//, /^lit-html($|\/)/, /^lit-element($|\/)/],
+			external: [/^lit($|\/)/v, /^@lit\//v, /^lit-html($|\/)/v, /^lit-element($|\/)/v],
 		},
 		sourcemap: true,
 		target: 'es2021',

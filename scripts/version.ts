@@ -6,6 +6,7 @@ import { readFile } from 'node:fs/promises'
 import { dirname, join } from 'node:path'
 import { promisify } from 'node:util'
 
+// eslint-disable-next-line ts/strict-void-return -- `promisify(execFile)` is Node's documented idiom; the returned `ChildProcess` is unused.
 const execFileAsync = promisify(execFile)
 
 type GitInfo = {
@@ -32,7 +33,7 @@ async function getGitInfo(): Promise<GitInfo> {
 	info.branch = await run(['rev-parse', '--abbrev-ref', 'HEAD'])
 
 	const rawDate = await run(['log', '-1', '--format=%cI'])
-	if (rawDate) {
+	if (rawDate !== null && rawDate !== '') {
 		info.commitDate = new Date(rawDate).toISOString()
 	}
 
@@ -65,25 +66,21 @@ async function readPackageUp(startDirectory: string): Promise<null | Record<stri
 }
 
 function parsePrerelease(version: null | string | undefined): string[] {
-	if (!version) {
+	if (version === null || version === undefined || version.length === 0) {
 		return []
 	}
 
 	// E.g. "1.2.3-beta.1" → ["beta", "1"]
 	const hyphen = version.indexOf('-')
-	if (hyphen === -1) {
-		return []
-	}
-
-	return version.slice(hyphen + 1).split('.')
+	return hyphen === -1 ? [] : version.slice(hyphen + 1).split('.')
 }
 
 async function getPackageInfo(): Promise<PackageInfo> {
 	const pkg = await readPackageUp(process.cwd())
 	return {
-		// eslint-disable-next-line ts/no-unnecessary-condition, ts/no-unsafe-type-assertion
+		// eslint-disable-next-line ts/no-unnecessary-condition
 		name: (pkg?.name as string) ?? null,
-		// eslint-disable-next-line ts/no-unnecessary-condition, ts/no-unsafe-type-assertion
+		// eslint-disable-next-line ts/no-unnecessary-condition
 		version: (pkg?.version as string) ?? null,
 	}
 }

@@ -6,14 +6,14 @@
 
 <!-- badges -->
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/mit/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/license/mit)
 [![CI](https://github.com/kitschpatrol/cad-nauseam/actions/workflows/ci.yml/badge.svg)](https://github.com/kitschpatrol/cad-nauseam/actions/workflows/ci.yml)
 
 <!-- /badges -->
 
 <!-- short-description -->
 
-**A web-based implementation of Wolfram's one-dimensional cellular automata.**
+**Web-based implementation of Wolfram's one-dimensional cellular automata.**
 
 <!-- /short-description -->
 

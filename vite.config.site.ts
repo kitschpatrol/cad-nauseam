@@ -9,6 +9,7 @@ import { defineConfig } from 'vite'
  * Workers Static Assets looks up files by the full URL path, so files must live
  * under a `cad-nauseam/` subdirectory inside the assets directory.
  */
+// eslint-disable-next-line unicorn/no-top-level-side-effects -- Vite config module; the shared config only exempts `*.config.*` filenames.
 export default defineConfig({
 	base: '/cad-nauseam/',
 	build: {

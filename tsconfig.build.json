@@ -12,6 +12,5 @@
 		"noEmit": false,
 		"outDir": "dist"
 	},
-	"include": ["src/**/*.ts"],
-	"exclude": ["src/**/*.test.ts", "test/**/*", "dist/**/*"]
+	"include": ["src/"]
 }

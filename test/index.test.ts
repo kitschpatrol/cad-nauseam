@@ -1,6 +1,3 @@
-/* eslint-disable node/no-unsupported-features/node-builtins */
-// `CustomEvent` and `Event` are DOM types exercised in happy-dom.
-
 import { beforeEach, describe, expect, it } from 'vitest'
 import { CadNauseam } from '../src/cad-nauseam.ts'
 
@@ -24,8 +21,8 @@ describe('cad-nauseam', () => {
 			node.remove()
 		}
 
-		if (globalThis.location.hash.length > 0) {
-			globalThis.history.replaceState(undefined, '', ' ')
+		if (location.hash.length > 0) {
+			history.replaceState(undefined, '', ' ')
 		}
 	})
 
@@ -182,10 +179,10 @@ describe('cad-nauseam', () => {
 		const element = await mount((current) => {
 			current.rule = 30
 		})
-		expect(globalThis.location.hash).toBe('')
+		expect(location.hash).toBe('')
 		element.rule = 110
 		await element.updateComplete
-		expect(globalThis.location.hash).toBe('')
+		expect(location.hash).toBe('')
 	})
 
 	it('mirrors rule to window.location.hash when shouldSyncHash is enabled', async () => {
@@ -194,9 +191,9 @@ describe('cad-nauseam', () => {
 			current.rule = 30
 		})
 		await element.updateComplete
-		expect(globalThis.location.hash).toBe('#30')
+		expect(location.hash).toBe('#30')
 		element.rule = 110
 		await element.updateComplete
-		expect(globalThis.location.hash).toBe('#110')
+		expect(location.hash).toBe('#110')
 	})
 })
