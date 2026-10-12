@@ -2,24 +2,6 @@ allowBuilds:
   esbuild: true
   unrs-resolver: true
   workerd: true
-minimumReleaseAgeExclude:
-  - '@kitschpatrol/cspell-config@8.13.1'
-  - '@kitschpatrol/eslint-config@8.13.1'
-  - '@kitschpatrol/knip-config@8.13.1'
-  - '@kitschpatrol/mdat-config@8.13.1'
-  - '@kitschpatrol/prettier-config@8.13.1'
-  - '@kitschpatrol/remark-config@8.13.1'
-  - '@kitschpatrol/repo-config@8.13.1'
-  - '@kitschpatrol/shared-config@8.13.1'
-  - '@kitschpatrol/stylelint-config@8.13.1'
-  - '@kitschpatrol/typescript-config@8.13.1'
-  - lognow@0.8.5
-  - mdat@3.6.2
-  - metascope@0.12.2
-  - poptab@1.2.2
-  - read-pyproject@0.4.1
-overrides:
-  miniflare>sharp: 0.35.5
 peerDependencyRules:
   allowedVersions:
     # Remove once the installed version declares ESLint 10 support.
